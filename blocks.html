@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-4 Unit Residential Appraisal Report</title>
+    <style>
+        body {
+             
+            font-size: 9pt;
+            margin: 20px;
+            color: #000;
+        }
+
+        .appraiser-name {
+            text-align: right;
+            margin-bottom: 5px;
+        }
+
+        .report-header {
+            text-align: center;
+            font-size: 13pt;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .file-no {
+            text-align: right;
+            margin-bottom: 8px;
+        }
+
+        .rotated-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            width: 22px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #ddd;
+            padding: 8px 3px;
+            white-space: nowrap;
+            font-size: 8pt;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 0.75px solid #000;
+            padding: 3px 5px;
+            vertical-align: top;
+            font-size: 9pt;
+        }
+
+        /* Modified gray-line class to be editable with proper styling */
+        .gray-line {
+            display: inline-block;
+            min-width: 60px;
+            min-height: 16px;
+            border-bottom: 1px solid #888;
+            margin: 0 2px;
+            vertical-align: baseline;
+            background: transparent;
+            outline: none;
+            padding: 0 2px;
+        }
+
+        .gray-line:focus {
+            border-bottom: 2px solid #0066cc;
+            background-color: #f9f9f9;
+        }
+
+        /* Added checkbox styling for black checkmarks */
+        input[type="checkbox"] {
+            width: 14px;
+            height: 14px;
+            margin-right: 4px;
+            accent-color: #000;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #000;
+        }
+
+        /* Standardized checkbox block styling for consistency */
+        .checkbox-block {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .checkbox-label {
+            min-width: 100px;
+            margin-right: 10px;
+        }
+
+        .option-text {
+            background-color: #f0f0f0;
+            padding: 1px 3px;
+            border-radius: 2px;
+            margin-right: 8px;
+            font-size: 9pt;
+            display: inline-block;
+            min-width: 15px;
+            min-height: 1em;
+        }
+
+        .option-text:focus {
+            background-color: #e6f3ff;
+            outline: 1px solid #0066cc;
+        }
+
+        .comments {
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .nested-table {
+            width: 100%;
+            border-spacing: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .nested-table td {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+ 
+    <div class="report-header">2-4 UNIT RESIDENTIAL APPRAISAL REPORT</div>
+    <div class="file-no">File No.: 70601</div>
+
+    <table>
+        <tr>
+            <td class="rotated-text">SUBJECT</td>
+            <td>
+                <table>
+                    <tr>
+                        <td>Property Address: <span class="gray-line" contenteditable="true"></span></td>
+                        <td>City: <span class="gray-line" contenteditable="true"></span></td>
+                        <td>State: <span class="gray-line" contenteditable="true"></span></td>
+                        <td>Zip Code: <span class="gray-line" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>County: <span class="gray-line" contenteditable="true"></span></td>
+                        <td colspan="3">Legal Description: <span class="gray-line" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Assessor's Parcel #: <span class="gray-line" contenteditable="true"></span></td>
+                        <td>Tax Year: <span class="gray-line" contenteditable="true"></span></td>
+                        <td>R.E. Taxes: $ <span class="gray-line" contenteditable="true"></span></td>
+                        <td>Special Assessments: $ <span class="gray-line" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Occupant:</label>
+                            <input type="checkbox" name="occupant" value="owner"> Owner
+                            <input type="checkbox" name="occupant" value="tenant"> Tenant
+                            <input type="checkbox" name="occupant" value="vacant"> Vacant
+                        </td>
+                        <td>
+                            <label>Project Type:</label>
+                            <input type="checkbox" name="project_type" value="pud"> PUD
+                            <input type="checkbox" name="project_type" value="other"> Other (describe)
+                        </td>
+                        <td colspan="2">
+                            <label>HOA: $ <span class="gray-line" contenteditable="true"></span></label>
+                            <input type="checkbox" name="hoa_period" value="yearly"> per yr.
+                            <input type="checkbox" name="hoa_period" value="monthly"> per mo.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Market Area Name: <span class="gray-line" contenteditable="true"></span></td>
+                        <td>Map Reference: <span class="gray-line" contenteditable="true"></span></td>
+                        <td>Census Tract: <span class="gray-line" contenteditable="true"></span></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="rotated-text">ASSIGNMENT</td>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td colspan="2">The purpose of this appraisal is to develop an opinion of:</td>
+                        <td>
+                            <input type="checkbox" name="value_type" value="market_value"> Market Value (as defined)
+                        </td>
+                        <td>
+                            <input type="checkbox" name="value_type" value="other"> Other type of value (describe)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">This report reflects the following value (if not Current, see comments):</td>
+                        <td>
+                            <input type="checkbox" name="value_timing" value="current"> Current (Inspection Date = Effective Date)
+                        </td>
+                        <td>
+                            <input type="checkbox" name="value_timing" value="retrospective"> Retrospective
+                            <input type="checkbox" name="value_timing" value="prospective"> Prospective
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Approaches developed for this appraisal:</td>
+                        <td>
+                            <input type="checkbox" name="approaches" value="sales_comparison"> Sales Comparison<br>
+                            <input type="checkbox" name="approaches" value="cost"> Cost Approach
+                        </td>
+                        <td>
+                            <input type="checkbox" name="approaches" value="income"> Income Approach<br>
+                            (See Reconciliation Comments and Scope of Work)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Property Rights Appraised:</td>
+                        <td>
+                            <input type="checkbox" name="property_rights" value="fee_simple"> Fee Simple<br>
+                            <input type="checkbox" name="property_rights" value="leasehold"> Leasehold
+                        </td>
+                        <td>
+                            <input type="checkbox" name="property_rights" value="leased_fee"> Leased Fee<br>
+                            <input type="checkbox" name="property_rights" value="other"> Other (describe)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            Intended Use: <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Intended User(s) (by name or type): <span class="gray-line" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Client: <span class="gray-line" contenteditable="true"></span></td>
+                        <td colspan="3">Address: <span class="gray-line" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Appraiser: <span class="gray-line" contenteditable="true"></span></td>
+                        <td colspan="3">Address: <span class="gray-line" contenteditable="true"></span></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="rotated-text">MARKET AREA DESCRIPTION</td>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td style="white-space:nowrap;">
+                            <label>Location:</label>
+                            <input type="checkbox" name="location" value="urban"> Urban
+                            <input type="checkbox" name="location" value="suburban"> Suburban
+                            <input type="checkbox" name="location" value="rural"> Rural<br>
+
+                            <label>Built up:</label>
+                            <input type="checkbox" name="built_up" value="over_75"> Over 75%
+                            <input type="checkbox" name="built_up" value="25_75"> 25-75%
+                            <input type="checkbox" name="built_up" value="under_25"> Under 25%<br>
+
+                            <label>Growth rate:</label>
+                            <input type="checkbox" name="growth_rate" value="rapid"> Rapid
+                            <input type="checkbox" name="growth_rate" value="stable"> Stable
+                            <input type="checkbox" name="growth_rate" value="slow"> Slow<br>
+
+                            <label>Property values:</label>
+                            <input type="checkbox" name="property_values" value="increasing"> Increasing
+                            <input type="checkbox" name="property_values" value="stable"> Stable
+                            <input type="checkbox" name="property_values" value="declining"> Declining<br>
+
+                            <label>Demand/supply:</label>
+                            <input type="checkbox" name="demand_supply" value="shortage"> Shortage
+                            <input type="checkbox" name="demand_supply" value="balance"> In Balance
+                            <input type="checkbox" name="demand_supply" value="over_supply"> Over Supply<br>
+
+                            <label>Marketing time:</label>
+                            <input type="checkbox" name="marketing_time" value="under_3"> Under 3 Mos.
+                            <input type="checkbox" name="marketing_time" value="3_6"> 3-6 Mos.
+                            <input type="checkbox" name="marketing_time" value="over_6"> Over 6 Mos.
+                        </td>
+
+                        <td>
+                            <label>Predominant Occupancy:</label><br>
+                            <input type="checkbox" name="predominant_occupancy" value="owner"> Owner<br>
+                            <input type="checkbox" name="predominant_occupancy" value="tenant"> Tenant<br>
+                            <input type="checkbox" name="predominant_occupancy" value="vacant_0_5"> Vacant (0-5%)<br>
+                            <input type="checkbox" name="predominant_occupancy" value="vacant_over_5"> Vacant (>5%)
+                        </td>
+
+                        <td>
+                            <div style="font-weight:bold; margin-bottom:4px;">2 - 4 Unit Housing</div>
+                            <div style="display:flex; justify-content:space-between; font-weight:bold;">
+                                <span>PRICE ($000)</span>
+                                <span></span>
+                                <span>AGE (yrs)</span>
+                            </div>
+                            <div><span class="gray-line" contenteditable="true"></span> &nbsp;&nbsp; Low &nbsp;&nbsp; <span class="gray-line" contenteditable="true"></span></div>
+                            <div><span class="gray-line" contenteditable="true"></span> &nbsp;&nbsp; High &nbsp;&nbsp; <span class="gray-line" contenteditable="true"></span></div>
+                            <div><span class="gray-line" contenteditable="true"></span> &nbsp;&nbsp; Pred &nbsp;&nbsp; <span class="gray-line" contenteditable="true"></span></div>
+                        </td>
+
+                        <td>
+                            Present Land Use:<br>
+                            One-Unit: <span class="gray-line" contenteditable="true"></span><br>
+                            2-4 Unit: <span class="gray-line" contenteditable="true"></span><br>
+                            Multi-Unit: <span class="gray-line" contenteditable="true"></span><br>
+                            Comm'l: <span class="gray-line" contenteditable="true"></span>
+                        </td>
+
+                        <td>
+                            <label>Change in Land Use:</label><br>
+                            <input type="checkbox" name="land_use_change" value="not_likely"> Not Likely<br>
+                            <input type="checkbox" name="land_use_change" value="likely"> Likely<br>
+                            <input type="checkbox" name="land_use_change" value="in_process"> In Process<br>
+                            * To: <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            Market Area Boundaries, Description, and Market Conditions (including support for the above characteristics and trends):<br>
+                            <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="rotated-text">SITE DESCRIPTION</td>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td colspan="6"><span class="label-bold">Dimensions:</span> <span class="gray-line" contenteditable="true"></span></td>
+                        <td colspan="3"><span class="label-bold">Site Area:</span> <span class="gray-line" contenteditable="true"></span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><span class="label-bold">Zoning Classification:</span> <span class="gray-line" contenteditable="true"></span></td>
+                        <td colspan="5">
+                            <span class="label-bold">Description:</span>
+                            <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <input type="checkbox" name="ccrs" value="yes"> Yes
+                            <input type="checkbox" name="ccrs" value="no"> No
+                            <input type="checkbox" name="ccrs" value="unknown"> Unknown
+                            Are CC&Rs applicable?
+                        </td>
+                        <td colspan="2">
+                            Have the documents been reviewed?
+                            <input type="checkbox" name="documents_reviewed" value="yes"> Yes
+                            <input type="checkbox" name="documents_reviewed" value="no"> No
+                        </td>
+                        <td colspan="3">
+                            <label>Zoning Compliance:</label>
+                            <input type="checkbox" name="zoning_compliance" value="legal"> Legal
+                            <input type="checkbox" name="zoning_compliance" value="legal_nonconforming"> Legal nonconforming (grandfathered)
+                            <input type="checkbox" name="zoning_compliance" value="illegal"> Illegal
+                            <input type="checkbox" name="zoning_compliance" value="no_zoning"> No zoning
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9"><span class="label-bold">Comments:</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="9">
+                            <label>Highest & Best Use as improved:</label>
+                            <input type="checkbox" name="highest_best_use" value="present_use"> Present use
+                            <input type="checkbox" name="highest_best_use" value="other"> Other use (explain)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <span class="label-bold">Actual Use as of Effective Date:</span> <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                        <td colspan="5">
+                            <span class="label-bold">Use as appraised in this report:</span> <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9">
+                            <span class="label-bold">Summary of Highest & Best Use:</span>
+                            <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="section-header">Utilities</td>
+                        <td colspan="3" class="section-header">Off-site Improvements</td>
+                        <td colspan="3" class="section-header">Site Characteristics</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label>Electricity:</label> <input type="checkbox" name="electricity"><br>
+                            <label>Gas:</label> <input type="checkbox" name="gas"><br>
+                            <label>Water:</label> <input type="checkbox" name="water"><br>
+                            <label>Sanitary Sewer:</label> <input type="checkbox" name="sanitary_sewer"><br>
+                            <label>Storm Sewer:</label> <input type="checkbox" name="storm_sewer"><br>
+                            <label>Telephone:</label> <input type="checkbox" name="telephone"><br>
+                            <label>Multimedia:</label> <input type="checkbox" name="multimedia">
+                        </td>
+                        <td colspan="3">
+                            Street: <span class="gray-line" contenteditable="true"></span><br>
+                            Width: <span class="gray-line" contenteditable="true"></span><br>
+                            Surface: <span class="gray-line" contenteditable="true"></span><br>
+                            Curb/Gutter: <span class="gray-line" contenteditable="true"></span><br>
+                            Sidewalk: <span class="gray-line" contenteditable="true"></span><br>
+                            Street Lights: <span class="gray-line" contenteditable="true"></span><br>
+                            Alley: <span class="gray-line" contenteditable="true"></span><br>
+                            <input type="checkbox" name="street_type" value="public"> Public
+                            <input type="checkbox" name="street_type" value="private"> Private
+                        </td>
+                        <td colspan="3">
+                            Frontage: <span class="gray-line" contenteditable="true"></span><br>
+                            Topography: <span class="gray-line" contenteditable="true"></span><br>
+                            Size: <span class="gray-line" contenteditable="true"></span><br>
+                            Shape: <span class="gray-line" contenteditable="true"></span><br>
+                            Drainage: <span class="gray-line" contenteditable="true"></span><br>
+                            View: <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label>Other site elements:</label>
+                            <input type="checkbox" name="site_elements" value="inside_lot"> Inside Lot
+                            <input type="checkbox" name="site_elements" value="corner_lot"> Corner Lot
+                            <input type="checkbox" name="site_elements" value="cul_de_sac"> Cul de Sac
+                            <input type="checkbox" name="site_elements" value="underground_utilities"> Underground Utilities
+                            <input type="checkbox" name="site_elements" value="other"> Other (describe)
+                        </td>
+                        <td colspan="3">
+                            <input type="checkbox" name="fema_flood" value="yes"> FEMA Spec'l Flood Hazard Area<br>
+                            <input type="checkbox" name="fema_flood" value="no"> No<br>
+                            FEMA Flood Zone: <span class="gray-line" contenteditable="true"></span><br>
+                            FEMA Map #: <span class="gray-line" contenteditable="true"></span><br>
+                            FEMA Map Date: <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9">
+                            <span class="label-bold">Site Comments:</span>
+                            <span class="gray-line" contenteditable="true"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

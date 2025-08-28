@@ -1,0 +1,379 @@
+ .vertical-section {
+  background-color: #5a5b5e;
+  color: black;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  border: 1pt solid #000;
+  border-bottom: 2px solid #000;
+  border-right: 2px solid #000;
+  padding: 0;
+  position: relative;
+}
+.vertical-section .vertical-text {
+  display: inline-block;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg) !important;
+  letter-spacing: 2px;
+  font-family: "Roboto Condensed", "Arial Narrow", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  padding: 8px 0;
+}
+.assignment-spacer {
+  border: none !important;
+  height: 0;
+  padding: 0 !important;
+}
+.with-vertical td.vertical-section {
+  border-left: 2px solid #000 !important;
+}
+.with-vertical td:not(.vertical-section) {
+  border-left: none !important;
+}
+
+/* Copied content from style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: white;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    font-family: "Roboto", Arial, sans-serif;
+}
+.report-container {
+    width: 938px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 0;
+}
+.report-header {
+    text-align: left;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+.report-header h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+}
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 5px 0;
+    border: 2px solid #000;
+}
+.assignment-row, .data-row {
+    height: 22px;
+}
+.inputfield-label {
+    font-size: 14px;
+    margin-left: 0px;
+    margin-right: 2px;
+    display: inline-block;
+    white-space: nowrap;
+}
+.input-cell {
+    display: inline-block;
+    width: calc(100% - 10px);
+}
+.form-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: #f0f8ff;
+    font-size: 16px !important;
+    padding: 0px 2px;
+    box-sizing: border-box;
+}
+.assignment-header {
+    background-color: #94a9d7;
+    color: black;
+    font-weight: 350;
+    font-size: 18px;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid #000;
+    border-bottom: 2px solid #000;
+    padding: 2px 2px;
+}
+.no-side-borders td:first-child {
+    border-left: none !important;
+}
+.no-side-borders td:last-child {
+    border-right: none !important;
+}
+.white-mask-left::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: white;
+    padding-right: 5px !important;
+}
+.white-mask-right::after {
+    content: "";
+    position: absolute;
+    right: -5px;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: white;
+}
+.white-mask-left, .white-mask-right {
+    position: relative;
+}
+.label-text {
+  font-family: 'JFont', sans-serif;
+  width: 100px;
+  text-align: left;
+}
+.pdf-button {
+    top: 10px;
+    right: 20px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    margin-right: 30px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 1000;
+    position: fixed;  
+}
+ .pdf-button:hover {
+        background: #d33a3a;
+         
+    }
+@media print {
+    .pdf-button {
+        background: #c03627;
+        display: none !important;
+    }
+}
+
+/* ===== USER OVERRIDE FOR GP24 BORDERS ===== */
+.label-cell-gp {
+    /* Copied from .label-cell in style.css */
+    font-size: 14px;
+    font-stretch: condensed;
+    transform: scaleX(1.0);
+    background-color: white;
+    color: black;
+    font-weight: 400;
+    text-align: left;
+    vertical-align: middle;
+    padding: 2px 5px;
+    white-space: nowrap;
+    font-family: "Jfont", sans-serif;
+    position: relative;
+    /* Overridden border rule */
+    border: 1px solid black !important;
+}
+
+.label-cell td{
+ border: 0px solid black !important;
+ border-bottom: 1px solid black !important;
+}
+
+/*
+ * GP24 custom border rules
+ *
+ * The goal of these overrides is to ensure that the overall table and the
+ * vertical SUBJECT bar retain their heavier 2â€¯px outlines, while all
+ * interior cell dividers use a thinner 1â€¯px stroke.  We avoid touching the
+ * vendor supplied style.css directly by providing more specific selectors
+ * here.  Without these overrides the default styles set borders on
+ * <td> elements inconsistently (e.g. 2â€¯pt borders and no left/right
+ * borders), resulting in mismatched line weights.  These rules collapse
+ * everything back down to a consistent appearance without altering the
+ * external frame.
+ */
+/* GP24 border customizations */
+
+/* Make all interior cell borders thin */
+.report-table td {
+  border: 1px solid #000 !important;
+}
+
+/* Keep the outer table border at 2px */
+.report-table {
+  border: 2px solid #000;
+  border-collapse: collapse;
+}
+
+/* Use a thin border on assignment headers */
+.report-table .assignment-header {
+  border: 1px solid #000 !important;
+  border-left: 1px solid #000 !important;
+  border-right: 1px solid #000 !important;
+  border-bottom: 1px solid #000 !important;
+}
+
+
+
+/* Put a thin left border back on rows that remove it via `.no-left-border` */
+.report-table tr.no-left-border td {
+  border-left: 1px solid #C4C4C4 !important;
+}
+
+/* Likewise restore the left border on rows with vertical sections */
+.report-table .with-vertical td:not(.vertical-section) {
+  border-left: 0px solid #000 !important;
+}
+
+/* Keep the heavy 2px border on the SUBJECT column */
+#subject-vertical {
+  border: 2px solid #000 !important;
+  border-left: 2px solid #000 !important;
+  border-right: 2px solid #000 !important;
+  border-top: 2px solid #000 !important;
+  border-bottom: 2px solid #000 !important;
+}
+
+
+.only-bottom-border tr{
+    border: none !important;
+    border-bottom: 2px solid black !important;
+}
+
+/* --- Add this code to remove internal vertical borders for a specific row --- */
+
+/* 1. Aggressively remove vertical borders from all cells in the row */
+.no-internal-borders > td {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+/* 2. Restore the right border on the 'SUBJECT' column specifically */
+.no-internal-borders > td#subject-vertical {
+    border-right: 2px solid black !important;
+}
+
+/* 3. Restore the main outer right border on the very last cell of the row */
+.no-internal-borders > td:last-child {
+    border-right: 2px solid black !important;
+}
+
+tr.data-row.no-left-border > td:not(:first-child) {
+    border-left: none !important;
+}
+
+.label-cell {
+    font-size: 14px;
+}    
+
+.label-cell[colspan="8"] .input-cell {
+    max-width: calc(100% - 0px);
+}
+
+.label-cell[colspan="7"] .input-cell {
+    max-width: calc(100% - 0px);
+}
+
+.label-cell[colspan="6"] .input-cell {
+    max-width: calc(100% - 0px);
+}
+
+.label-cell[colspan="5"] .input-cell {
+    max-width: calc(100% - 0px);
+}
+
+.label-cell[colspan="9"] .input-cell {
+    max-width: calc(100% - 0px);
+}
+
+/* === Two-line ruled block === */
+.ruled-container {
+  position: relative;
+  /* exactly 2 rows × 22px; override any inline height */
+  height: calc(2 * 22px) !important;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 21px,   /* text area body */
+    #ccc 21px,          /* the rule */
+    #ccc 22px
+  );
+  background-size: 100% 22px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.ruled-container .floating-label {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  background: #fff;     /* mask the rule under the label */
+  padding: 0 4px;
+  z-index: 1;
+}
+
+.ruled-textarea {
+  width: 100%;
+  /* fit inside the 2-row container */
+  height: calc(2 * 22px - 2px);
+  line-height: 22px;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  padding: 2px 5px;
+  text-indent: var(--ruled-indent, 0px);
+  position: relative;
+  top: -2px; /* nudge to align with the first rule */
+}
+
+/* PDF/export safety (keeps the rules visible) */
+.pdf-export .ruled-container {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+tr.shift-up {
+    transform: translateY(-2px);
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid black !important;
+    border-bottom: 1px solid black !important;
+}
+
+/* Also add borders to the td elements if needed */
+tr.shift-up td {
+    border-top: 1px solid black !important;
+    border-bottom: 1px solid black !important;
+}
+
+.ruled-textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 17px;
+    padding: 2px 5px;
+    box-sizing: border-box;
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 22px;
+    text-indent: var(--ruled-indent, 0);
+    overflow: hidden;
+    position: relative;
+    top: -4px;
+}
+
+.form-input{
+    font-size: 16px !important;
+}
+
+
+
+tr.shift-up td {
+    padding-top: 2px; /* instead of transform */
+    padding-bottom: 2px;
+}

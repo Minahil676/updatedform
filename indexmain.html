@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAGAPP-GP</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://ezformspro.com/src/robo.css">
+  <link rel="stylesheet" href="https://ezformspro.com/src/logo.css">
+  <link rel="stylesheet" href="https://ezformspro.com/fonts/myfonts.css">
+  <link rel="stylesheet" href="https://ezformspro.com/src/style.css">
+
+  <!-- Local fallback CSS -->
+  <link rel="stylesheet" href="gp24.css">
+
+  <link rel="stylesheet" href="https://ezformspro.com/src/ruledtext.css" />
+  <link rel="stylesheet" href="https://ezformspro.com/src/CustomFonts.css" />
+
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    .expanded-comps-view {
+      display: none;
+    }
+     
+  </style>
+</head>
+
+<body id="lagapp-form" data-auto-init="true">
+
+  <!-- PDF Button -->
+  <button id="pdfButton" class="pdf-button">PDF</button>
+
+  <!-- Main Report Container -->
+  <div class="report-container">
+    <div class="report-table-wrapper">
+     
+       <div data-include="h.html">
+        Loading content...
+      </div>
+     
+       
+    </div>
+  </div>
+
+  <!-- Keep your data management imports -->
+  <script type="module">
+    import reportDataStore from '../data-management/report-data-store.js';
+    import savingReports from '../data-management/savingreports.js';
+
+    window.reportDataStore = reportDataStore;
+    window.savingReports = savingReports;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await reportDataStore.init();
+      console.log('Data management system initialized');
+    });
+  </script>
+
+  <!-- Scripts (unchanged, just cleaned duplicates) -->
+  <script type="module" src="../src/fontsizes.js"></script>
+  <script type="module" src="../src/basic.js"></script>
+  <script type="module" src="../src/comments.js"></script>
+  <script type="module" src="../src/templates.js"></script>
+  <script src="../src/iframe-field-sync.js"></script>
+  <script type="module" src="../src/QuickCompsFill.js"></script>
+  <script type="module" src="../Workfile/CompMagic.js"></script>
+  <script type="module" src="../src/CompPics.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.parent !== window) {
+        const pdfButton = document.getElementById('pdfButton');
+        if (pdfButton) {
+          pdfButton.style.display = 'none';
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import syncManager from '../data-management/sync-manager.js';
+    import reportDataStore from '../data-management/report-data-store.js';
+    import savingReports from '../data-management/savingreports.js';
+    import '../data-management/migration-helper.js';
+
+    window.syncManager = syncManager;
+    window.reportDataStore = reportDataStore;
+    window.savingReports = savingReports;
+
+    initializeDataManagement({
+      formId: 'lagapp-form'
+    });
+  </script>
+
+  <!-- Subject Input / Message Handling Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log('DOM loaded for LAGAPP.html. Setting up all listeners.');
+
+      const subjectHeader = document.getElementById('assignment-header');
+      const hiddenInput = document.getElementById('hiddenDataInput');
+      let savedValue = '';
+
+      if (subjectHeader && hiddenInput) {
+        subjectHeader.addEventListener('mouseenter', function () {
+          hiddenInput.style.display = 'block';
+          hiddenInput.value = savedValue;
+          hiddenInput.focus();
+          hiddenInput.select();
+        });
+        subjectHeader.addEventListener('mouseleave', function () {
+          if (document.activeElement !== hiddenInput) {
+            savedValue = hiddenInput.value;
+            hiddenInput.style.display = 'none';
+          }
+        });
+      }
+
+      if (hiddenInput) {
+        hiddenInput.addEventListener('blur', function () {
+          if (this.value.trim()) {
+            window.parent.postMessage({
+              type: 'parseRequest',
+              target: 'Subject',
+              htmlString: this.value
+            }, '*');
+          } else {
+            this.style.display = 'none';
+          }
+        });
+      }
+
+      window.addEventListener('message', function (event) {
+        if (event.data && event.data.type === 'parseSuccess') {
+          if (event.data.target === 'Subject' && hiddenInput) {
+            hiddenInput.style.transition = 'opacity 2s ease-out';
+            hiddenInput.style.opacity = '0';
+            setTimeout(() => {
+              hiddenInput.style.display = 'none';
+              hiddenInput.style.opacity = '1';
+              hiddenInput.value = '';
+              savedValue = '';
+            }, 2000);
+          }
+        }
+      });
+    });
+
+    console.log('Iframe ready. Sending "iframe-ready" to parent.');
+    window.parent.postMessage({ type: 'iframe-ready' }, '*');
+  </script>
+
+  <!-- Comparable toggle script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('comp-sales-expand');
+      if (toggle) {
+        toggle.addEventListener('click', function (event) {
+          event.stopPropagation();
+          const rows = document.querySelectorAll('tr.expanded-comps-view');
+          rows.forEach(row => {
+            row.style.display = (row.style.display === 'table-row') ? 'none' : 'table-row';
+          });
+        });
+      }
+    });
+  </script>
+
+  <script src="../src/comparableAddressSearch.js"></script>
+  <script src="../src/redfinmagic.js"></script>
+  <script type="module" src="../src/iframe-toggles.js"></script>
+  <script src="../src/adjustments.js"></script>
+  <script src="../src/adjustments-clickoverride.js"></script>
+
+  <!-- Keyboard shortcut save -->
+  <script>
+    window.addEventListener('keydown', function (event) {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+        event.preventDefault();
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'iframe-save-report' }, '*');
+        }
+        return false;
+      }
+    });
+  </script>
+
+  <!-- Dynamic include loader -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-include]').forEach(el => {
+        const src = el.getAttribute('data-include');
+        if (src) {
+          fetch(src)
+            .then(response => {
+              if (!response.ok) throw new Error(`Failed to load ${src}`);
+              return response.text();
+            })
+            .then(data => el.innerHTML = data)
+            .catch(err => {
+              console.error('Error loading include:', err);
+              el.innerHTML = 'Failed to load content.';
+            });
+        }
+      });
+    });
+  </script>
+
+  <!-- PDF export script -->
+ <script>
+document.getElementById('pdfButton').addEventListener('click', () => {
+  const { jsPDF } = window.jspdf;
+  const reportContainer = document.querySelector(".report-container");
+
+  html2canvas(reportContainer, { scale: 2 }).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+
+    // Legal paper in points (1pt = 1/72 inch)
+    const pdf = new jsPDF('p', 'pt', [612, 1008]); // 8.5x14 inches in points
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    // If content exceeds one page, split into multiple pages
+    let heightLeft = pdfHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+    heightLeft -= pdf.internal.pageSize.getHeight();
+
+    while (heightLeft > 0) {
+      position = heightLeft - pdfHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+      heightLeft -= pdf.internal.pageSize.getHeight();
+    }
+
+    pdf.save("form.pdf");
+  });
+});
+</script>
+
+
+  <!--Auto-Resize Font Script (from font.js) -->
+  <script>
+    function autoResizeInput(input) {
+      const defaultFontSize = 18;
+      const minFontSize = 10;
+      const stepSize = 0.05;
+
+      input.style.setProperty('font-size', defaultFontSize + 'px', 'important');
+
+      const tempSpan = document.createElement('span');
+      tempSpan.style.visibility = 'hidden';
+      tempSpan.style.position = 'absolute';
+      tempSpan.style.whiteSpace = 'nowrap';
+      tempSpan.style.fontFamily = window.getComputedStyle(input).fontFamily;
+      tempSpan.style.fontWeight = window.getComputedStyle(input).fontWeight;
+      tempSpan.style.letterSpacing = window.getComputedStyle(input).letterSpacing;
+      document.body.appendChild(tempSpan);
+
+      function textFits(fontSize) {
+        tempSpan.style.fontSize = fontSize + 'px';
+        tempSpan.textContent = input.value;
+        const textWidth = tempSpan.offsetWidth;
+        const inputWidth = input.offsetWidth - 4;
+        return textWidth <= inputWidth;
+      }
+
+      if (!textFits(defaultFontSize)) {
+        let currentSize = defaultFontSize;
+        while (currentSize > minFontSize && !textFits(currentSize)) {
+          currentSize -= stepSize;
+        }
+        if (currentSize < minFontSize) currentSize = minFontSize;
+        currentSize = Math.round(currentSize * 10) / 10;
+        input.style.setProperty('font-size', currentSize + 'px', 'important');
+      }
+      document.body.removeChild(tempSpan);
+    }
+
+    function optimizeInputWidths() {
+      const labelCells = document.querySelectorAll('.label-cell');
+      labelCells.forEach(cell => {
+        const label = cell.querySelector('.inputfield-label');
+        const inputCell = cell.querySelector('.input-cell');
+        const input = cell.querySelector('.form-input, .form-input-underlined');
+        if (label && inputCell && input) {
+          const labelWidth = label.offsetWidth;
+          const padding = 12;
+          const optimalWidth = `calc(100% - ${labelWidth + padding}px)`;
+          inputCell.style.width = optimalWidth;
+          inputCell.style.display = 'inline-block';
+        }
+      });
+    }
+
+    function initializeAutoResize() {
+      optimizeInputWidths();
+      const inputs = document.querySelectorAll('.auto-resize:not([data-resize-initialized])');
+      inputs.forEach(input => {
+        input.setAttribute('data-resize-initialized', 'true');
+        autoResizeInput(input);
+        input.addEventListener('input', function () {
+          autoResizeInput(this);
+        });
+        let resizeTimeout;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(() => {
+            optimizeInputWidths();
+            autoResizeInput(input);
+          }, 100);
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeAutoResize);
+    setTimeout(initializeAutoResize, 100);
+
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.addedNodes.length) {
+          const newInputs = document.querySelectorAll('.auto-resize:not([data-resize-initialized])');
+          newInputs.forEach(input => {
+            input.setAttribute('data-resize-initialized', 'true');
+            autoResizeInput(input);
+            input.addEventListener('input', function () {
+              autoResizeInput(this);
+            });
+          });
+        }
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.initializeAutoResize = initializeAutoResize;
+  </script>
+
+</body>
+</html>
